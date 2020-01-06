@@ -15,20 +15,22 @@
 
     // draw your widget at xpos
     function draw() {
-        // Widget	(0,0,239,23)
-        if (stp_today > 99999){
-            stp_today = stp_today % 100000; // cap to five digits + comma = 6 characters
-            erase();
+        if(Bangle.isLCDOn()){
+            // Widget	(0,0,239,23)
+            if (stp_today > 99999){
+                stp_today = stp_today % 100000; // cap to five digits + comma = 6 characters
+                erase();
+            }
+            let stps = stp_today.toString();
+            if (stps.length > 3){
+                stps = stps.slice(0,-3) + "," + stps.slice(-3); 
+            }
+            g.setColor(1,1,1);
+            g.setFont("4x6", 2);
+            g.setFontAlign(1, 0); // align to x: right, y: center
+            g.drawString(stps, xpos, 11, true); // 6 * 4*2 = 48
+            g.flip();
         }
-        let stps = stp_today.toString();
-        if (stps.length > 3){
-            stps = stps.slice(0,-3) + "," + stps.slice(-3); 
-        }
-        g.setColor(1,1,1);
-        g.setFont("4x6", 2);
-        g.setFontAlign(1, 0); // align to x: right, y: center
-        g.drawString(stps, xpos, 11, true); // 6 * 4*2 = 48
-        g.flip();
     }
     
     Bangle.on('step', (up) => {
