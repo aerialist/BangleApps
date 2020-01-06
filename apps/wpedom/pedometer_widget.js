@@ -26,8 +26,9 @@
                 stps = stps.slice(0,-3) + "," + stps.slice(-3); 
             }
             g.setColor(1,1,1);
-            g.setFont("4x6", 2);
+            g.setFont("4x6", 2); //4x6 or 6x8
             g.setFontAlign(1, 0); // align to x: right, y: center
+            erase(); // somehow drawString(,,,true) doesn't fill with background...?
             g.drawString(stps, xpos, 11, true); // 6 * 4*2 = 48
             g.flip();
         }
